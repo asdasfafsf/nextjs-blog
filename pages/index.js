@@ -3,21 +3,32 @@ import Layout, { siteTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 import Link from 'next/link';
 import Date from '../components/date';
+import { getSortedPostsData } from '../lib/posts';
 
 
 
+
+// export async function getStaticProps() {
+//   const response = await fetch('http://localhost:3000/api/posts')
+//   const json = await response.json();
+//   const allPostsData = json.allPostsData;
+
+//   return {
+//     props: {
+//       allPostsData
+//     }
+//   }
+// }
 
 export async function getStaticProps() {
-  const response = await fetch('http://localhost:3000/api/posts')
-  const json = await response.json();
-  const allPostsData = json.allPostsData;
-
+  const allPostsData = getSortedPostsData();
+  
   return {
     props: {
       allPostsData
     }
   }
-}
+}  
 
 export default function Home({allPostsData}) {
   // const [allPostsData, setAllPostsData] = useState([])
