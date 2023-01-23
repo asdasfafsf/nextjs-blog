@@ -1,11 +1,14 @@
 import Layout from "../../components/Layout"
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import Link from "next/link";
 
 export default function write () {
     const idRef = useRef(undefined);
     const titleRef = useRef(undefined);
     const contentRef = useRef(undefined);
 
+
+    const [showLink, setShowLink] = useState(false);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -27,8 +30,17 @@ export default function write () {
                     content
                 })
             })
-            .then(response => response.json())
-            .then(data => alert(data.message));
+            .then(response => {
+                if (response.ok) {
+                    setShowLink(true);
+                    return response.json();
+                }
+
+                throw new Error('Fetch Error')
+            })
+            .then(data => alert(data.message))
+            .catch(err => alert(err.message))
+            
         }
     }
 
@@ -45,6 +57,9 @@ export default function write () {
                 <br />
                 <input type="submit" value ="Create" />
             </form>
+            {showLink && 
+                <Link href ={`/posts/${idRef.current.value}`}> Created Post Link </Link>
+            }
         </Layout>
     )
 }
