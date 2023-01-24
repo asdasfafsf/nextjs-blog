@@ -26,6 +26,16 @@ export async function getStaticProps( { params }) {
     }
 }
 
+const Button = ({children}) => {
+  return (<button 
+      className='bg-black text-lg text-teal-200 rounded-lg px-5 dark:bg-white dark:text-teal-700'
+      onClick={() => {alert( children )}}>
+      
+      {children}
+    </button>
+  )
+}
+
 export default function Post({ postData }) {
     // const router = useRouter();
 
@@ -33,17 +43,6 @@ export default function Post({ postData }) {
     //     return <div>Loading...</div>
     // }
 
-    const Button = ({children}) => {
-      return (
-        <button 
-          className='bg-black text-lg text-teal-200 rounded-lg px-5 dark:bg-white dark:text-teal-700'
-          onClick={() => {alert( children )}}
-        >
-          
-          {children}
-        </button>
-      )
-    }
     const components = {Button, CodeBlock}
 
     return (
