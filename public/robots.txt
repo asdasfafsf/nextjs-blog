@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://nextjs-blog-topaz-seven-51.vercel.app/
+
+# Sitemaps
+Sitemap: https://nextjs-blog-topaz-seven-51.vercel.app/sitemap.xml
