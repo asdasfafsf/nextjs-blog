@@ -6,6 +6,13 @@ import Date from '../../components/date';
 import { useRouter } from 'next/router';
 import { MDXRemote } from 'next-mdx-remote';
 import CodeBlock from '../../components/CodeBlock';
+// import Button from '../../components/Button';
+
+import dynamic from 'next/dynamic';
+
+const Button = dynamic(() => import('../../components/Button'), {
+  loading: () => <div>loading....</div>
+})
 
 export function getStaticPaths() {
     const paths = getAllPostIds();
@@ -27,15 +34,6 @@ export async function getStaticProps( { params, preview }) {
     }
 }
 
-const Button = ({children}) => {
-  return (<button 
-      className='bg-black text-lg text-teal-200 rounded-lg px-5 dark:bg-white dark:text-teal-700'
-      onClick={() => {alert( children )}}>
-      
-      {children}
-    </button>
-  )
-}
 
 export default function Post({ postData }) {
     // const router = useRouter();
