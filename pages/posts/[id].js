@@ -1,18 +1,18 @@
-import Layout from '../../components/Layout';
+
 import { getAllPostIds, getPostData } from '../../lib/posts';
 import utilStyles from '../../styles/utils.module.css';
 import Head from 'next/head';
-import Date from '../../components/date';
+import Date from '@components/date';
 import { useRouter } from 'next/router';
 import { MDXRemote } from 'next-mdx-remote';
-import CodeBlock from '../../components/CodeBlock';
-// import Button from '../../components/Button';
+import CodeBlock from '@components/CodeBlock';
+import Button from '@components/Button';
 
 import dynamic from 'next/dynamic';
 
-const Button = dynamic(() => import('../../components/Button'), {
-  loading: () => <div>loading....</div>
-})
+// const Button = dynamic(() => import('../../components/Button'), {
+//   loading: () => <div>loading....</div>
+// })
 
 export function getStaticPaths() {
     const paths = getAllPostIds();
@@ -45,7 +45,7 @@ export default function Post({ postData }) {
     const components = {Button, CodeBlock}
 
     return (
-      <Layout>
+      <>
       <Head>
         <title>{postData.title}</title>
       </Head>
@@ -57,6 +57,6 @@ export default function Post({ postData }) {
         {postData.contentHtml && <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />}
         {postData.mdxSource && <MDXRemote {...postData.mdxSource} components={components}></MDXRemote>}
       </article>
-      </Layout>
+      </>
     );
   }

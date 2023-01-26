@@ -1,4 +1,3 @@
-import Layout from "../../components/Layout"
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -57,7 +56,7 @@ export default function write () {
     }
 
     return (
-        <Layout>
+        <>
             <h1>Write a Post</h1>
 
             <form onSubmit={handleSubmit}>
@@ -72,7 +71,7 @@ export default function write () {
             {showLink && 
                 <Link href ={`/posts/${idRef.current.value}`}> Created Post Link </Link>
             }
-        </Layout>
+        </>
     )
 }
 
