@@ -2,11 +2,10 @@
 import { getAllPostIds, getPostData } from '../../lib/posts';
 import utilStyles from '../../styles/utils.module.css';
 import Head from 'next/head';
-import Date from '@components/date';
-import { useRouter } from 'next/router';
+import Date from '../../components/date'
 import { MDXRemote } from 'next-mdx-remote';
-import CodeBlock from '@components/CodeBlock';
-import Button from '@components/Button';
+import CodeBlock from '@/components/CodeBlock';
+import Button from '@/components/Button';
 
 import dynamic from 'next/dynamic';
 
@@ -24,7 +23,7 @@ export function getStaticPaths() {
 }
 
 
-export async function getStaticProps( { params, preview }) {
+export async function getStaticProps( { params, preview, pathname }) {
     console.log(`>>>>>>>> ${preview}`)
     const postData = await getPostData(params.id);
     return {
@@ -35,7 +34,7 @@ export async function getStaticProps( { params, preview }) {
 }
 
 
-export default function Post({ postData }) {
+export default function Post({ postData, pathname }) {
     // const router = useRouter();
 
     // if (router.isFallback) {
@@ -51,6 +50,7 @@ export default function Post({ postData }) {
       </Head>
       <article>
         <h1 className={utilStyles.headingXl}>{postData.title}</h1>
+        <h2>{pathname}</h2>
         <div className={utilStyles.lightText}>
           <Date dateString={postData.date} />
         </div>
