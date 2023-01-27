@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 
 // export async function getServerSideProps() {
@@ -57,7 +58,9 @@ export default function write () {
 
     return (
         <>
-            <h1>Write a Post</h1>
+            <Head>
+                <title>write a post</title>
+            </Head>
 
             <form onSubmit={handleSubmit}>
                 <input type='text' placeholder="id" id="id" required ref={idRef}/>
@@ -66,7 +69,7 @@ export default function write () {
                 <br />
                 <textarea type='text' placeholder="title" id="title" required ref={contentRef} />
                 <br />
-                <input type="submit" value ="Create" />
+                <input className="rounded bg-pink 800"type="submit" value ="Create" />
             </form>
             {showLink && 
                 <Link href ={`/posts/${idRef.current.value}`}> Created Post Link </Link>
