@@ -1,3 +1,5 @@
+import React from 'React';
+
 class ErrorBoundary extends React.Component {
 
     constructor(props) {
@@ -34,12 +36,12 @@ class ErrorBoundary extends React.Component {
                     <h2>Error Ocurred</h2>
                     <details style={{ whiteSpace: 'pre-wrap'}}>
                         {this.state.error && this.state.error.toString()}
-                        <br />
-                        {this.state.errorInfo.componentStack}                    
                     </details>
                 </div>
             )
        }
+
+       return this.props.children;
     }
 }
 
