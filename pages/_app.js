@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 import { useState } from 'react';
 import { format, formatDistance, formatDistanceToNow } from 'date-fns'
 import ErrorBoundary from '@/components/ErrorBoundary';
-import React from 'react';
 
 export function reportWebVitals(metric) {
     console.log(metric);
