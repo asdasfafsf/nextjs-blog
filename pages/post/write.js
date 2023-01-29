@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Head from "next/head";
@@ -12,8 +12,16 @@ export default function write () {
     const router = useRouter();
 
     useEffect(() => {
-        console.log(router.query);
+        if (router.isReady) {
+            console.log(router.query);
+        }
+
+        router.prefetch('/posts/ssg-ssr')
     })
+
+    useEffect(() => {
+        console.log(JSON.stringify(router));
+    }, [router])
 
     const idRef = useRef(undefined);
     const titleRef = useRef(undefined);
@@ -74,8 +82,33 @@ export default function write () {
             {showLink && 
                 <Link href ={`/posts/${idRef.current.value}`}> Created Post Link </Link>
             }
+
+            <br />
+            <button onClick={() => router.push('/posts/ssg-ssr')} className="rounded bg-pink-200">router push</button>
+            <br />
+            <br />
+            <button onClick={() => router.push('/posts/ssg-ssr')} className="rounded bg-pink-200">router.replace</button>
+
+            <button onClick={() => router.push('/posts/ssg-ssr')} className="rounded bg-pink-200">router.replace</button>
+            <br />
+            <br />
+            <Link href={'/posts/ssg-ssr'} passHref legacyBehavior>
+                <LinkButton />
+            </Link>
+            <br />
+            <br />
+            <Link href={'/posts/ssg-ssr'} replace scroll={false}>
+                <a>가즈아</a>
+            </Link>
         </>
     )
 }
 
+const LinkButton = React.forwardRef(({ onClick, href }, ref) => {
+    return (
+      <a href={href} onClick={onClick} ref={ref}>
+        Click Me
+      </a>
+    )
+  });
 // write.getInitialProps = async () => {};
