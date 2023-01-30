@@ -2,7 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import getConfig from 'next/config'
 
+// Only holds serverRuntimeConfig and publicRuntimeConfig
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig()
+// Will only be available on the server-side
+console.log(serverRuntimeConfig.mySecret)
+// Will be available on both server-side and client-side
+console.log(publicRuntimeConfig.staticFolder)
 
 // export async function getServerSideProps() {
 //     return {}
@@ -67,7 +74,7 @@ export default function write () {
     return (
         <>
             <Head>
-                <title>write a post</title>
+                <title>write a post {process.env.customKey}</title>
             </Head>
 
             <form onSubmit={handleSubmit}>
